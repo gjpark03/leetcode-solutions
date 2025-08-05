@@ -7,15 +7,27 @@ class Solution(object):
         """
         n = len(nums)
         k = k % n
-        
-        for _ in range(k):
-            # Rotate by 1
-            last = nums[-1]
-            for i in range(n-1, 0, -1):
-                nums[i] = nums[i-1]
-            nums[0] = last
+        left = 0
+        right = len(nums) - 1
 
-            
+        # reverse the whole array
+        while left < right:
+            nums[left], nums[right] = nums[right], nums[left]
+            left += 1
+            right -= 1
 
+        # reverse the first k elements
+        left = 0
+        right = k - 1
+        while left < right:
+            nums[left], nums[right] = nums[right], nums[left]
+            left += 1
+            right -= 1
 
-        
+        # remaining elements
+        left = k
+        right = n - 1
+        while left < right:
+            nums[left], nums[right] = nums[right], nums[left]
+            left += 1
+            right -= 1
